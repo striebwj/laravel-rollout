@@ -45,7 +45,10 @@
         "laravel": {
             "providers": [
                 "Jaspaul\\LaravelRollout\\ServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Rollout": "Jaspaul\\LaravelRollout\\Facades\\Rollout"
+            }
         }
     }
 }
