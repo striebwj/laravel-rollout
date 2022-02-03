@@ -21,7 +21,7 @@ class RemoveUserCommandTest extends TestCase
         $rollout->activateUser('derp', new User('1'));
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('0|1||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('0|1|||[]', $store->get('rollout.feature:derp'));
 
         Artisan::call('rollout:remove-user', [
             'feature' => 'derp',
@@ -29,6 +29,6 @@ class RemoveUserCommandTest extends TestCase
         ]);
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('0|||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('0||||[]', $store->get('rollout.feature:derp'));
     }
 }

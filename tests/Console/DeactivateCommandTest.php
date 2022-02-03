@@ -22,7 +22,7 @@ class DeactivateCommandTest extends TestCase
         $rollout->activatePercentage('derp', 82);
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('82|1||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('82|1|||[]', $store->get('rollout.feature:derp'));
 
         Artisan::call('rollout:deactivate', [
             'feature' => 'derp'
@@ -31,6 +31,6 @@ class DeactivateCommandTest extends TestCase
         $store = app()->make('cache.store')->getStore();
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('0|||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('0||||[]', $store->get('rollout.feature:derp'));
     }
 }

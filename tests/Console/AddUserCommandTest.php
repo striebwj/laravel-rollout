@@ -22,6 +22,6 @@ class AddUserCommandTest extends TestCase
         $store = app()->make('cache.store')->getStore();
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('0|1||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('0|1|||[]', $store->get('rollout.feature:derp'));
     }
 }

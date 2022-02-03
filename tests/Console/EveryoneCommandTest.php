@@ -21,6 +21,6 @@ class EveryoneCommandTest extends TestCase
         $store = app()->make('cache.store')->getStore();
 
         $this->assertEquals('derp', $store->get('rollout.feature:__features__'));
-        $this->assertEquals('100|||', $store->get('rollout.feature:derp'));
+        $this->assertEquals('100||||[]', $store->get('rollout.feature:derp'));
     }
 }
