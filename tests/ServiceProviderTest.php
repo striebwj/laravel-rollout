@@ -2,8 +2,8 @@
 
 namespace Tests;
 
+use Jaspaul\LaravelRollout\Rollout;
 use Mockery;
-use Opensoft\Rollout\Rollout;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Cache\Repository;
 use Jaspaul\LaravelRollout\ServiceProvider;

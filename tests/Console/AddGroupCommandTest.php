@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Drivers;
+namespace Tests\Console;
 
+use Jaspaul\LaravelRollout\Facade\Rollout;
 use Tests\TestCase;
-use Opensoft\Rollout\Rollout;
 use Tests\Doubles\SampleGroup;
 use Illuminate\Support\Facades\Artisan;
 use Jaspaul\LaravelRollout\Helpers\User;
@@ -11,6 +11,13 @@ use Jaspaul\LaravelRollout\Drivers\Cache;
 
 class AddGroupCommandTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['laravel-rollout.storage' => 'cache']);
+    }
+
     /**
      * @test
      */
@@ -34,13 +41,13 @@ class AddGroupCommandTest extends TestCase
     {
         config(['laravel-rollout.groups' => [SampleGroup::class]]);
 
-        $this->assertFalse(app()->make(Rollout::class)->isActive('derp', new User('id')));
+        $this->assertFalse(Rollout::isActive('derp', new User('id')));
 
         Artisan::call('rollout:add-group', [
             'feature' => 'derp',
             'group' => 'sample-group'
         ]);
 
-        $this->assertTrue(app()->make(Rollout::class)->isActive('derp', new User('id')));
+        $this->assertTrue(Rollout::isActive('derp', new User('id')));
     }
 }

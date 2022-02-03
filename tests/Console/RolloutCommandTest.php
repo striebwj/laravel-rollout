@@ -2,10 +2,10 @@
 
 namespace Tests\Console;
 
+use Jaspaul\LaravelRollout\Rollout;
 use Mockery;
 use Tests\TestCase;
 use Opensoft\Rollout\Feature;
-use Opensoft\Rollout\Rollout;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Console\Kernel;

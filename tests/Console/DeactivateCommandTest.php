@@ -1,15 +1,21 @@
 <?php
 
-namespace Tests\Drivers;
+namespace Tests\Console;
 
+use Jaspaul\LaravelRollout\Rollout;
 use Tests\TestCase;
-use Opensoft\Rollout\Rollout;
 use Illuminate\Support\Facades\Artisan;
 use Jaspaul\LaravelRollout\Helpers\User;
-use Jaspaul\LaravelRollout\Drivers\Cache;
 
 class DeactivateCommandTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['laravel-rollout.storage' => 'cache']);
+    }
+
     /**
      * @test
      */

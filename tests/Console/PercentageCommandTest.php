@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Drivers;
+namespace Tests\Console;
 
 use Tests\TestCase;
 use Opensoft\Rollout\Rollout;
@@ -9,6 +9,13 @@ use Jaspaul\LaravelRollout\Drivers\Cache;
 
 class PercentageCommandTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['laravel-rollout.storage' => 'cache']);
+    }
+
     /**
      * @test
      */

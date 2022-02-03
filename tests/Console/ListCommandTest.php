@@ -1,16 +1,23 @@
 <?php
 
-namespace Tests\Drivers;
+namespace Tests\Console;
 
+use Jaspaul\LaravelRollout\Rollout;
 use Tests\TestCase;
 use Opensoft\Rollout\Feature;
-use Opensoft\Rollout\Rollout;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Contracts\Console\Kernel;
 use Jaspaul\LaravelRollout\FeaturePresenter;
 
 class ListCommandTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['laravel-rollout.storage' => 'cache']);
+    }
+
     /**
      * @test
      */
