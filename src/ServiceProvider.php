@@ -2,6 +2,7 @@
 
 namespace Jaspaul\LaravelRollout;
 
+use Illuminate\Support\Facades\Blade;
 use Opensoft\Rollout\Rollout;
 use Illuminate\Cache\Repository;
 use Illuminate\Cache\DatabaseStore;
@@ -63,6 +64,8 @@ class ServiceProvider extends IlluminateServiceProvider
             RemoveGroupCommand::class,
             RemoveUserCommand::class
         ]);
+
+        $this->registerBladeDirectives();
     }
 
     /**
@@ -113,5 +116,33 @@ class ServiceProvider extends IlluminateServiceProvider
                 return $instance->hasMember($user);
             });
         }
+    }
+
+    private function registerBladeDirectives()
+    {
+        $this->registerBladeFeatureDirective();
+        $this->registerBladeFeatureForDirective();
+    }
+
+    private function registerBladeFeatureDirective()
+    {
+        Blade::directive('rollout', function ($featureName) {
+            return "<?php if (\Jaspaul\LaravelRollout\Facade\Rollout::isActive($featureName)): ?>";
+        });
+
+        Blade::directive('endrollout', function () {
+            return '<?php endif; ?>';
+        });
+    }
+
+    private function registerBladeFeatureForDirective()
+    {
+        Blade::directive('rolloutfor', function ($args) {
+            return "<?php if (app(\\LaravelFeature\\Domain\\FeatureManager::class)->isEnabledFor($args)): ?>";
+        });
+
+        Blade::directive('endrolloutfor', function () {
+            return '<?php endif; ?>';
+        });
     }
 }
