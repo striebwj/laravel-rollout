@@ -2,7 +2,8 @@
 
 namespace Jaspaul\LaravelRollout\Console;
 
-use Opensoft\Rollout\Rollout;
+//use Opensoft\Rollout\Rollout;
+use Jaspaul\LaravelRollout\Rollout;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Jaspaul\LaravelRollout\FeaturePresenter;

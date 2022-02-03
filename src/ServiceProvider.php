@@ -3,7 +3,8 @@
 namespace Jaspaul\LaravelRollout;
 
 use Illuminate\Support\Facades\Blade;
-use Opensoft\Rollout\Rollout;
+//use Opensoft\Rollout\Rollout;
+use Jaspaul\LaravelRollout\Rollout;
 use Illuminate\Cache\Repository;
 use Illuminate\Cache\DatabaseStore;
 use Jaspaul\LaravelRollout\Drivers\Cache;

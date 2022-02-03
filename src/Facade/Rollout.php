@@ -13,6 +13,7 @@ class Rollout extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return app(\Opensoft\Rollout\Rollout::class);
+//        return app(\Opensoft\Rollout\Rollout::class);
+        return app(\Jaspaul\LaravelRollout\Rollout::class);
     }
 }
