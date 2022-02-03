@@ -13,7 +13,10 @@ class CreateRolloutTable extends Migration
      */
     public function up()
     {
-        Schema::create('rollout', function (Blueprint $table) {
+        $connection = config('laravel-rollout.connection');
+        $table = config('laravel-rollout.table');
+
+        Schema::connection($connection)->create($table, function (Blueprint $table) {
             $table->string('key')->unique();
             $table->text('value');
             $table->integer('expiration');
@@ -27,6 +30,9 @@ class CreateRolloutTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rollout');
+        $connection = config('laravel-rollout.connection');
+        $table = config('laravel-rollout.table');
+
+        Schema::connection($connection)->dropIfExists($table);
     }
 }
