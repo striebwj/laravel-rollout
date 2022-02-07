@@ -2,6 +2,7 @@
 
 namespace Tests\Drivers;
 
+use Jaspaul\LaravelRollout\Facade\Rollout;
 use Tests\TestCase;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
@@ -64,5 +65,15 @@ class CacheTest extends TestCase
 
         $this->cache->remove($key);
         $this->assertNull($this->cache->get($key));
+    }
+
+    /**
+     * @test
+     */
+    public function feature_can_be_fetched_from_cache()
+    {
+        $feature = Rollout::isActive('test');
+
+        dd($feature);
     }
 }

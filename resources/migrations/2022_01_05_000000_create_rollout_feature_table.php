@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolloutTable extends Migration
+class CreateRolloutFeatureTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,11 @@ class CreateRolloutTable extends Migration
         $table = config('laravel-rollout.table');
 
         Schema::connection($connection)->create($table, function (Blueprint $table) {
-            $table->string('key')->unique();
-            $table->text('value');
-            $table->integer('expiration');
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('description')->nullable();
+            $table->timestamps();
         });
     }
 

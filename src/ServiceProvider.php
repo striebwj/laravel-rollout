@@ -2,26 +2,21 @@
 
 namespace Jaspaul\LaravelRollout;
 
-use Illuminate\Support\Facades\Blade;
-//use Opensoft\Rollout\Rollout;
-use Jaspaul\LaravelRollout\Rollout;
-use Illuminate\Cache\Repository;
-use Illuminate\Cache\DatabaseStore;
-use Jaspaul\LaravelRollout\Drivers\Cache;
-use Illuminate\Database\ConnectionInterface;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Jaspaul\LaravelRollout\Console\ListCommand;
-use Jaspaul\LaravelRollout\Console\CreateCommand;
-use Jaspaul\LaravelRollout\Console\DeleteCommand;
-use Jaspaul\LaravelRollout\Console\AddUserCommand;
-use Jaspaul\LaravelRollout\Console\AddGroupCommand;
-use Jaspaul\LaravelRollout\Console\EveryoneCommand;
 use Illuminate\Contracts\Config\Repository as Config;
-use Jaspaul\LaravelRollout\Console\DeactivateCommand;
-use Jaspaul\LaravelRollout\Console\PercentageCommand;
-use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
-use Jaspaul\LaravelRollout\Console\RemoveGroupCommand;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Jaspaul\LaravelRollout\Console\AddGroupCommand;
+use Jaspaul\LaravelRollout\Console\AddUserCommand;
+use Jaspaul\LaravelRollout\Console\CreateCommand;
+use Jaspaul\LaravelRollout\Console\DeactivateCommand;
+use Jaspaul\LaravelRollout\Console\DeleteCommand;
+use Jaspaul\LaravelRollout\Console\EveryoneCommand;
+use Jaspaul\LaravelRollout\Console\ListCommand;
+use Jaspaul\LaravelRollout\Console\PercentageCommand;
+use Jaspaul\LaravelRollout\Console\RemoveGroupCommand;
+use Jaspaul\LaravelRollout\Console\RemoveUserCommand;
+use Jaspaul\LaravelRollout\Drivers\Cache;
+use Jaspaul\LaravelRollout\Drivers\Database;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
@@ -35,15 +30,17 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->publishConfigurations();
 
         $this->loadMigrations();
+        $this->loadFactoriesFrom(__DIR__.'/../resources/factories');
 
         $this->app->singleton(Rollout::class, function ($app) {
             $config = $app->make(Config::class);
 
             if ($config->get('laravel-rollout.storage') === 'database') {
-                $table = $config->get('laravel-rollout.table');
-
-                $repository = new Repository($app->makeWith(DatabaseStore::class, ['table' => $table]));
-                $driver = new Cache($repository);
+                $driver = $app->make(Database::class);
+//                $table = $config->get('laravel-rollout.table');
+//
+//                $repository = new Repository($app->makeWith(DatabaseStore::class, ['table' => $table]));
+//                $driver = new Cache($repository);
             } else {
                 $driver = new Cache($app->make('cache.store'));
             }

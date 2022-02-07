@@ -3,6 +3,7 @@
 namespace Jaspaul\LaravelRollout\Drivers;
 
 use Illuminate\Support\Facades\DB;
+use Jaspaul\LaravelRollout\Models\Feature;
 use Opensoft\Rollout\Storage\StorageInterface;
 
 class Database implements StorageInterface
@@ -24,7 +25,7 @@ class Database implements StorageInterface
      */
     public function get($key)
     {
-        return $this->dbQuery->where('feature', $key)->first();
+        return $this->dbQuery->where(Feature::DB_SLUG, $key)->first();
         // TODO: Implement get() method.
     }
 

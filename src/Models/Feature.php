@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feature extends Model
 {
+    const DB_NAME = 'name';
+    const DB_SLUG = 'slug';
+    const DB_DESCRIPTION = 'description';
+    const DB_CREATED_AT = 'created_at';
+    const DB_UPDATED_AT = 'updated_at';
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -15,6 +21,8 @@ class Feature extends Model
     }
 
     protected $fillable = [
-        'name'
+        self::DB_NAME,
+        self::DB_SLUG,
+        self::DB_DESCRIPTION,
     ];
 }
